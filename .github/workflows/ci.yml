@@ -47,7 +47,12 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: coverage
-          path: book-app/coverage   
+          path: book-app/coverage
+      
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: javascript    
 
       - name: Perform CodeQL analysis
         uses: github/codeql-action/analyze@v2
