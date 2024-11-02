@@ -24,6 +24,11 @@ app.put('/book', (req, res) => {
     }
 });
 
+// Ruta para la raíz
+app.get('/', (req, res) => {
+    res.send('Bienvenido a la aplicación Book App! Ve a /book para ver el contenido del libro.');
+});
+
 // Inicio del servidor
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
