@@ -24,6 +24,11 @@ jobs:
           cd book-app
           npm install
 
+      - name: Set permissions and reinstall dependencies
+        run: |
+          sudo chmod -R 755 ./node_modules/.bin
+          npm install    
+
       - name: Run lint
         run: |
           cd book-app
