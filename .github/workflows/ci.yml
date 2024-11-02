@@ -33,7 +33,7 @@ jobs:
         run: |
           cd book-app
           npm install  # Asegura que las dependencias estén instaladas
-           npx eslint .
+          ./node_modules/.bin/eslint .
 
       - name: Run tests
         run: |
