@@ -62,6 +62,7 @@ jobs:
         uses: github/codeql-action/analyze@v2
         with:
           category: "/language:javascript"
+          output: results/codeql-analysis.sarif
           token: ${{ secrets.CODEQL_TOKEN }}
       #ODEQL_TOKEN AÑADIDO    
       - name: Snyk Security Scan
