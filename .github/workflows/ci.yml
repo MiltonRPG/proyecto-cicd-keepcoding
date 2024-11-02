@@ -55,12 +55,14 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
-          languages: javascript    
+          languages: javascript
+          token: ${{ secrets.CODEQL_TOKEN }}    
 
       - name: Perform CodeQL analysis
         uses: github/codeql-action/analyze@v2
         with:
           category: "/language:javascript"
+          token: ${{ secrets.CODEQL_TOKEN }}
           
       - name: Snyk Security Scan
         run: |
