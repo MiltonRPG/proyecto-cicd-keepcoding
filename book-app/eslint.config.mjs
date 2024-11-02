@@ -7,9 +7,11 @@ export default [
     languageOptions: {
       globals: {
         ...globals.browser,
-        ...globals.node  // Agrega las variables globales de Node.js
+        ...globals.node,
+        ...globals.jest  // Agrega las variables globales de Jest
       },
     },
   },
   pluginJs.configs.recommended,
 ];
+
