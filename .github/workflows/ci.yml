@@ -63,12 +63,12 @@ jobs:
         with:
           category: "/language:javascript"
           output: results/codeql-analysis.sarif
-          token: ${{ secrets.CODEQL_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       #ODEQL_TOKEN AÑADIDO    
       - name: Snyk Security Scan
         run: |
           npm install -g snyk
-          snyk auth ${{ secrets.SNYK_TOKEN }}
+          snyk auth "${{ secrets.SNYK_TOKEN }}"
           snyk test   
 
       - name: Build Docker image
