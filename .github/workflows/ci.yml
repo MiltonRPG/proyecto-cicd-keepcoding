@@ -33,6 +33,7 @@ jobs:
         run: |
           cd book-app
           npm install  # Asegura que las dependencias estén instaladas
+          chmod +x ./node_modules/.bin/eslint  # Configura permisos de ejecución
           ./node_modules/.bin/eslint .
 
       - name: Run tests
