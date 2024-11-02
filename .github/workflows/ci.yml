@@ -48,6 +48,7 @@ jobs:
 
       - name: Snyk Security Scan
         run: |
+          cd book-app
           npm install -g snyk
           snyk auth ${{ secrets.SNYK_TOKEN }}
           snyk test
