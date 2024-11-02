@@ -7,7 +7,7 @@ on:
       - main
 
 permissions:
-  contents: write
+  contents: write  # Permisos de escritura para contenidos
 
 jobs:
   build:
@@ -27,11 +27,6 @@ jobs:
           cd book-app
           npm install
 
-      #- name: Set permissions and reinstall dependencies
-      #  run: |
-      #    sudo chmod -R 755 ./node_modules/.bin
-      #    npm install    
-
       - name: Run lint
         run: |
           cd book-app
@@ -39,37 +34,23 @@ jobs:
           chmod +x ./node_modules/.bin/eslint  # Configura permisos de ejecución
           ./node_modules/.bin/eslint .
 
-      - name: Run tests whit coverage
+      - name: Run tests with coverage
         run: |
           cd book-app
-          npm install  # Asegura que las dependencias estén instaladas
           chmod +x ./node_modules/.bin/jest  # Configura permisos de ejecución para Jest
           ./node_modules/.bin/jest --coverage
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v3
         with:
-          name: coverage
+          name: coverage-report
           path: book-app/coverage
-      
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
-        with:
-          languages: javascript
-          token: ${{ secrets.CODEQL_TOKEN }}    
 
-      - name: Perform CodeQL analysis
-        uses: github/codeql-action/analyze@v2
-        with:
-          category: "/language:javascript"
-          output: results/codeql-analysis.sarif
-          token: ${{ secrets.GITHUB_TOKEN }}
-      #ODEQL_TOKEN AÑADIDO    
       - name: Snyk Security Scan
         run: |
           npm install -g snyk
-          snyk auth "${{ secrets.SNYK_TOKEN }}"
-          snyk test   
+          snyk auth ${{ secrets.SNYK_TOKEN }}
+          snyk test
 
       - name: Build Docker image
         run: docker build -t book-app:latest .
@@ -80,3 +61,4 @@ jobs:
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
           docker tag book-app:latest <tu-usuario>/book-app:latest
           docker push <tu-usuario>/book-app:latest
+
