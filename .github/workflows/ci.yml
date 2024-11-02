@@ -36,12 +36,29 @@ jobs:
           chmod +x ./node_modules/.bin/eslint  # Configura permisos de ejecución
           ./node_modules/.bin/eslint .
 
-      - name: Run tests
+      - name: Run tests whit coverage
         run: |
           cd book-app
           npm install  # Asegura que las dependencias estén instaladas
           chmod +x ./node_modules/.bin/jest  # Configura permisos de ejecución para Jest
-          ./node_modules/.bin/jest
+          ./node_modules/.bin/jest --coverage
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: book-app/coverage   
+
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@v2
+        with:
+          category: "/language:javascript"
+          
+      - name: Snyk Security Scan
+        run: |
+          npm install -g snyk
+          snyk auth ${{ secrets.SNYK_TOKEN }}
+          snyk test   
 
       - name: Build Docker image
         run: docker build -t book-app:latest .
