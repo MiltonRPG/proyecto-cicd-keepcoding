@@ -39,7 +39,9 @@ jobs:
       - name: Run tests
         run: |
           cd book-app
-          npm test  # Asegúrate de tener pruebas configuradas en tu proyecto
+          npm install  # Asegura que las dependencias estén instaladas
+          chmod +x ./node_modules/.bin/jest  # Configura permisos de ejecución para Jest
+          ./node_modules/.bin/jest
 
       - name: Build Docker image
         run: docker build -t book-app:latest .
