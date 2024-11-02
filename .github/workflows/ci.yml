@@ -63,7 +63,7 @@ jobs:
         with:
           category: "/language:javascript"
           token: ${{ secrets.CODEQL_TOKEN }}
-          
+      #ODEQL_TOKEN AÑADIDO    
       - name: Snyk Security Scan
         run: |
           npm install -g snyk
