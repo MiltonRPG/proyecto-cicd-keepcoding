@@ -11,4 +11,4 @@ spec:
     - protocol: TCP
       port: 2746
       targetPort: 2746
-      nodePort: 30080  # Puedes cambiar este puerto si ya está en uso
+      nodePort: 30081  # Puedes cambiar este puerto si ya está en uso
