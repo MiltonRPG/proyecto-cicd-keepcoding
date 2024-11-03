@@ -18,7 +18,7 @@ app.put('/book', (req, res) => {
     const { content } = req.body;
     if (content) {
         bookContent = content;
-        res.json({ message: "Contenido del libro actualizado." });
+        res.json({ message: "Contenido del libro actualizado.Aqui podrás escribir contenido nuevo." });
     } else {
         res.status(400).json({ error: "No se proporcionó contenido para actualizar." });
     }
