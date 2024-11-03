@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: book-app-service
+  namespace: book-app
+spec:
+  type: NodePort
+  selector:
+    app: book-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+      nodePort: 30080  # Puedes elegir cualquier puerto entre 30000-32767
+

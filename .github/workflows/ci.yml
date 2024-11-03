@@ -6,6 +6,9 @@ on:
       - develop
       - main
 
+permissions:
+  contents: write  # Permisos de escritura para contenidos
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,7 +20,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '18'
 
       - name: Install dependencies
         run: |
@@ -27,12 +30,28 @@ jobs:
       - name: Run lint
         run: |
           cd book-app
-          npm run lint  # Asegúrate de tener eslint configurado en tu proyecto
+          npm install  # Asegura que las dependencias estén instaladas
+          chmod +x ./node_modules/.bin/eslint  # Configura permisos de ejecución
+          ./node_modules/.bin/eslint .
 
-      - name: Run tests
+      - name: Run tests with coverage
         run: |
           cd book-app
-          npm test  # Asegúrate de tener pruebas configuradas en tu proyecto
+          chmod +x ./node_modules/.bin/jest  # Configura permisos de ejecución para Jest
+          ./node_modules/.bin/jest --coverage
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: book-app/coverage
+
+      - name: Snyk Security Scan
+        run: |
+          cd book-app
+          npm install -g snyk
+          snyk auth ${{ secrets.SNYK_TOKEN }}
+          snyk test
 
       - name: Build Docker image
         run: docker build -t book-app:latest .
@@ -43,3 +62,4 @@ jobs:
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
           docker tag book-app:latest <tu-usuario>/book-app:latest
           docker push <tu-usuario>/book-app:latest
+
