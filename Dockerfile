@@ -14,5 +14,5 @@ COPY book-app/ .
 EXPOSE 8080
 
 # Comando para ejecutar la aplicación
-CMD ["node", "server.js"
+CMD ["node", "server.js"]
 
