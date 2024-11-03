@@ -6,7 +6,7 @@ const PORT = 8080;
 app.use(bodyParser.json());
 
 // Simular el contenido del "libro"
-let bookContent = "Este es el inicio del libro. Puedes editar este contenido.";
+let bookContent = "Este es el inicio del libro. Puedes editar este contenido cuando quieras.";
 
 // Ruta para obtener el contenido del libro
 app.get('/book', (req, res) => {
