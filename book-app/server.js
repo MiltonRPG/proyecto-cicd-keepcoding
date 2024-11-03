@@ -5,20 +5,23 @@ const PORT = 8080;
 
 app.use(bodyParser.json());
 
+// Define las rutas según el entorno
+const basePath = process.env.NODE_ENV === 'production' ? '/book' : '/dev/book';
+
 // Simular el contenido del "libro"
-let bookContent = "Este es el inicio del libro. Puedes editar este contenido cuando quieras, en cualquier momento";
+let bookContent = "Este es el inicio del libro. Puedes editar este contenido.";
 
 // Ruta para obtener el contenido del libro
-app.get('/book', (req, res) => {
+app.get(basePath, (req, res) => {
     res.json({ content: bookContent });
 });
 
 // Ruta para actualizar el contenido del libro
-app.put('/book', (req, res) => {
+app.put(basePath, (req, res) => {
     const { content } = req.body;
     if (content) {
         bookContent = content;
-        res.json({ message: "Contenido del libro actualizado.Aqui podrás escribir contenido nuevo." });
+        res.json({ message: "Contenido del libro actualizado." });
     } else {
         res.status(400).json({ error: "No se proporcionó contenido para actualizar." });
     }
@@ -26,10 +29,11 @@ app.put('/book', (req, res) => {
 
 // Ruta para la raíz
 app.get('/', (req, res) => {
-    res.send('Bienvenido a la aplicación Book App! Ve a /book para ver el contenido del libro.');
+    res.send('Bienvenido a la aplicación Book App!');
 });
 
 // Inicio del servidor
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
+
