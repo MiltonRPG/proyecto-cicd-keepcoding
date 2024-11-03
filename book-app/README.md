@@ -1,5 +1,7 @@
 Book App - CI/CD con Kubernetes y ArgoCD
 
+https://youtu.be/QaYaQX_UqWo
+
 Descripción del Proyecto
 
 Este proyecto es una aplicación web simple llamada Book App, diseñada para funcionar como un "libro" editable. La aplicación permite visualizar y modificar el contenido del libro a través de una API REST. La infraestructura del proyecto utiliza un pipeline de CI/CD con GitHub Actions para pruebas y despliegue de imágenes Docker, así como Kubernetes y ArgoCD para el despliegue automatizado en un clúster. El proyecto está configurado para diferenciar los entornos develop y master, ofreciendo rutas diferentes para cada uno y configuraciones específicas.
