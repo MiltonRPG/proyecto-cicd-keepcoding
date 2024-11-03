@@ -60,6 +60,6 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: |
           echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-          docker tag book-app:latest <tu-usuario>/book-app:latest
-          docker push <tu-usuario>/book-app:latest
+          docker tag book-app:latest miltonrpg/book-app:latest
+          docker push miltonrpg/book-app:latest
 
