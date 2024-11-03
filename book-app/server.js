@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 const basePath = process.env.NODE_ENV === 'production' ? '/book' : '/dev/book';
 
 // Simular el contenido del "libro"
-let bookContent = "Este es el inicio del libro. Puedes editar este contenido.";
+let bookContent = "Este es el inicio del libro. Puedes editar este contenido.Cuando gustes";
 
 // Ruta para obtener el contenido del libro
 app.get(basePath, (req, res) => {
